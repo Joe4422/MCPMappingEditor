@@ -14,5 +14,6 @@ namespace MCPMappingEditor.ViewModel
         }
 
         public override string OriginalLabel => $"({OriginalMember})";
+        public override string ListLabelText => $"_{Substitute}";
     }
 }

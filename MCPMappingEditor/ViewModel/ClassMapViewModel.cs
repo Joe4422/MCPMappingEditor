@@ -12,6 +12,8 @@ namespace MCPMappingEditor.ViewModel
 
         public override string OriginalLabel => $"({Original})";
 
+        public override string ListLabelText => $"_{Substitute}";
+
         public ClassMapViewModel(BaseMapEntry mapEntry, MapCollection mappings, List<BaseMapEntry> members) : base(mapEntry, mappings)
         {
             if (mapEntry is ClassMap == false)

@@ -36,6 +36,8 @@ namespace MCPMappingEditor
 
         public bool IsFileOpen => filePath != null;
 
+        private bool decompileOnSave = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,6 +49,21 @@ namespace MCPMappingEditor
             ClassesTreeView.KeyDown += ClassesTreeView_KeyDown;
 
             SearchBox.TextChanged += SearchBox_TextChanged;
+
+            if (File.Exists(".\\decompile.bat"))
+            {
+                FileMenu.Items.Insert(3, new Separator());
+                MenuItem decompileOnSaveItem = new MenuItem();
+                decompileOnSaveItem.Header = "Decompile On Save";
+                decompileOnSaveItem.IsCheckable = true;
+                decompileOnSaveItem.Click += DecompileOnSaveItem_Click;
+                FileMenu.Items.Insert(4, decompileOnSaveItem);
+            }
+        }
+
+        private void DecompileOnSaveItem_Click(object sender, RoutedEventArgs e)
+        {
+            decompileOnSave = (sender as MenuItem).IsChecked;
         }
 
         private void ClassesTreeView_KeyDown(object sender, KeyEventArgs e)
@@ -129,6 +146,10 @@ namespace MCPMappingEditor
         {
             mapFileManager.Serialise(filePath);
             mappings.CollectionModified = false;
+            if (decompileOnSave)
+            {
+                Decompile(".");
+            }
         }
 
         private void OpenFile(string filePath)
@@ -224,6 +245,12 @@ namespace MCPMappingEditor
 
                 Title = $"MCP Mapping Editor ({filePath})";
             }
+        }
+
+        private void Decompile(string mcpPath)
+        {
+            Process process = Process.Start(mcpPath + "\\decompile.bat");
+            process.WaitForExit();
         }
     }
 }

@@ -15,6 +15,8 @@ namespace MCPMappingEditor.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public abstract string ListLabelText { get; }
+
         private Visibility _IsSubstituteTextBoxVisible = Visibility.Hidden;
         public Visibility IsSubstituteTextBoxVisible
         {
@@ -70,7 +72,10 @@ namespace MCPMappingEditor.ViewModel
         private void MapEntry_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Substitute")
+            {
                 NotifyPropertyChanged("Substitute");
+                NotifyPropertyChanged("ListLabelText");
+            }
         }
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

@@ -32,6 +32,7 @@ namespace MCPMappingEditor.ViewModel
         }
 
         public override string OriginalLabel => $"({OriginalMember})";
+        public override string ListLabelText => $"_{SignatureString}";
 
         public MethodMapViewModel(BaseMapEntry mapEntry, MapCollection mappings, ClassMap classMapEntry) : base(mapEntry, mappings, classMapEntry)
         {
