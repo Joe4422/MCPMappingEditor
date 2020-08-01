@@ -7,6 +7,7 @@ The application offers searching functionality. The format is "\<class name\>.\<
 
 ## Editing
 To edit a mapping, either double click on it or press Enter. To save the edit, either click away from it or press Enter again.
+
 If a method mapping exists in multiple functions and "Rename All Methods with Same Substitute" is checked, all methods with the same substitute will be renamed. This is so you don't have to rename methods that are overridden in child classes separately from those methods in their parents.
 
 ## Automatic decompilation
